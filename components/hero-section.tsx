@@ -11,30 +11,10 @@ export default function HeroSection() {
       <div className="absolute bottom-0 left-0 right-0 z-30 bg-gradient-to-t from-black/80 via-black/40 to-transparent pt-24 pb-10">
         <div className="max-w-[1024px] mx-auto px-6">
           <p className="text-zinc-400 text-base max-w-lg leading-relaxed">
-            Product leader with 12+ years spanning engineering, program
-            management, and product leadership — serving millions of users and
-            driving measurable business outcomes.
+            I don&apos;t just write PRDs — I build. 12 years across engineering
+            and product, shipping AI-powered products to millions of users. I
+            still build.
           </p>
-
-          {/* Metrics */}
-          <div className="flex flex-wrap gap-8 mt-6">
-            <div>
-              <span className="block text-xl font-bold text-white">2M+</span>
-              <span className="text-xs text-zinc-500">Users Served</span>
-            </div>
-            <div>
-              <span className="block text-xl font-bold text-white">120%</span>
-              <span className="text-xs text-zinc-500">Engagement Lift</span>
-            </div>
-            <div>
-              <span className="block text-xl font-bold text-white">40%</span>
-              <span className="text-xs text-zinc-500">Adoption Growth</span>
-            </div>
-            <div>
-              <span className="block text-xl font-bold text-white">80</span>
-              <span className="text-xs text-zinc-500">People Managed</span>
-            </div>
-          </div>
 
           {/* Links */}
           <div className="flex gap-5 mt-6">

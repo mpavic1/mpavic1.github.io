@@ -85,31 +85,41 @@ class TextScramble {
 }
 
 const ScrambledTitle: React.FC = () => {
-  const elementRef = useRef<HTMLHeadingElement>(null)
-  const scramblerRef = useRef<TextScramble | null>(null)
+  const row1Ref = useRef<HTMLHeadingElement>(null)
+  const row2Ref = useRef<HTMLHeadingElement>(null)
+  const scrambler1Ref = useRef<TextScramble | null>(null)
+  const scrambler2Ref = useRef<TextScramble | null>(null)
   const [mounted, setMounted] = useState(false)
 
   useEffect(() => {
-    if (elementRef.current && !scramblerRef.current) {
-      scramblerRef.current = new TextScramble(elementRef.current)
+    if (row1Ref.current && !scrambler1Ref.current) {
+      scrambler1Ref.current = new TextScramble(row1Ref.current)
+    }
+    if (row2Ref.current && !scrambler2Ref.current) {
+      scrambler2Ref.current = new TextScramble(row2Ref.current)
+    }
+    if (scrambler1Ref.current && scrambler2Ref.current) {
       setMounted(true)
     }
   }, [])
 
   useEffect(() => {
-    if (mounted && scramblerRef.current) {
-      const phrases = [
-        'Mario Pavic',
-        'Head of Product',
-        'AI × Product',
-        '2M+ Users Served',
-        'Building What Matters',
+    if (mounted && scrambler1Ref.current && scrambler2Ref.current) {
+      const phrases: [string, string][] = [
+        ['MARIO PAVIC', 'Head of Product'],
+        ['I BUILD WITH AI', 'Not Just Roadmaps'],
+        ['10M+ CUSTOMERS', 'From Zero to Scale'],
+        ['ENGINEER → LEADER', 'Code to Boardroom'],
       ]
-      
+
       let counter = 0
       const next = () => {
-        if (scramblerRef.current) {
-          scramblerRef.current.setText(phrases[counter]).then(() => {
+        if (scrambler1Ref.current && scrambler2Ref.current) {
+          const [line1, line2] = phrases[counter]
+          Promise.all([
+            scrambler1Ref.current.setText(line1),
+            scrambler2Ref.current.setText(line2),
+          ]).then(() => {
             setTimeout(next, 2000)
           })
           counter = (counter + 1) % phrases.length
@@ -121,13 +131,22 @@ const ScrambledTitle: React.FC = () => {
   }, [mounted])
 
   return (
-    <h1 
-      ref={elementRef}
-      className="text-white text-6xl font-bold tracking-wider justify-center"
-      style={{ fontFamily: 'monospace' }}
-    >
-      Mario Pavic
-    </h1>
+    <div className="flex flex-col items-center gap-2">
+      <h1
+        ref={row1Ref}
+        className="text-white text-4xl sm:text-6xl font-bold tracking-wider"
+        style={{ fontFamily: 'monospace' }}
+      >
+        MARIO PAVIC
+      </h1>
+      <h2
+        ref={row2Ref}
+        className="text-white text-2xl sm:text-4xl font-bold tracking-wider"
+        style={{ fontFamily: 'monospace' }}
+      >
+        Head of Product
+      </h2>
+    </div>
   )
 }
 
